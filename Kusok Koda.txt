@@ -1,0 +1,21 @@
+здесь раньше был этот запрос, принимавший массив, получаемый из модели. Data не попадала в req.body. 
+            $.ajax({
+                url: '/comp_name' + dbid,
+                 type: 'POST',
+                 data: JSON.stringify(data),
+                 success: function(res) {
+                     console.log("ok");
+                 },
+                 error: function(err) {
+                     console.log(err);
+                 }
+             });
+
+
+             Вот это сработало.
+            $.post("/comp_name", { 'array': data });
+
+             серверная часть
+             app.post('/comp_names', function(req) {
+                 db.collection('comp_names').insertOne{req.body.array};
+             });
